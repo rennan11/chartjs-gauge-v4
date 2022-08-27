@@ -1,6 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import { DoughnutController, ArcElement } from 'chart.js';
-import { addRoundedRectPath, toRadians } from 'chart.js/helpers';
+import {
+  addRoundedRectPath, renderText, toFont, toRadians, toTRBLCorners,
+} from 'chart.js/helpers';
 import { version } from '../../package.json';
 
 
@@ -127,43 +129,38 @@ class GaugeController extends DoughnutController {
     ctx.restore();
   }
 
-  drawValueLabel(ease) { // eslint-disable-line no-unused-vars
+  drawValueLabel() {
     if (!this.options.valueLabel.display) {
       return;
     }
-    const { ctx, config } = this.chart;
-    const {
-      defaultFontFamily,
-    } = config.options;
+    const { ctx } = this.chart;
     const dataset = this.getDataset();
     const {
-      formatter,
-      fontSize,
       color,
+      formatter,
       backgroundColor,
       borderRadius,
       padding,
-      bottomMarginPercentage,
+      offsetX,
+      offsetY,
     } = this.options.valueLabel;
-
-    const width = this.getWidth(this.chart);
-    const bottomMargin = (bottomMarginPercentage / 100) * width;
+    const font = toFont(this.options.valueLabel.font);
 
     const fmt = formatter || (value => value);
     const valueText = fmt(dataset.value).toString();
+
+    ctx.save();
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
-    // TODO renderText
-    if (fontSize) {
-      ctx.font = `${fontSize}px ${defaultFontFamily}`;
-    }
+    ctx.font = font.string;
 
     // const { width: textWidth, actualBoundingBoxAscent, actualBoundingBoxDescent } = ctx.measureText(valueText);
     // const textHeight = actualBoundingBoxAscent + actualBoundingBoxDescent;
 
     const { width: textWidth } = ctx.measureText(valueText);
     // approximate height until browsers support advanced TextMetrics
-    const textHeight = Math.max(ctx.measureText('m').width, ctx.measureText('\uFF37').width);
+    // const textHeight = Math.max(ctx.measureText('m').width, ctx.measureText('\uFF37').width);
+    const { lineHeight: textHeight } = font;
 
     const x = -(padding.left + textWidth / 2);
     const y = -(padding.top + textHeight / 2);
@@ -172,28 +169,31 @@ class GaugeController extends DoughnutController {
 
     // center
     let { dx, dy } = this.getTranslation(this.chart);
-    // add rotation
-    const rotation = toRadians(this.chart.options.rotation) % (Math.PI * 2.0);
-    dx += bottomMargin * Math.cos(rotation + Math.PI / 2);
-    dy += bottomMargin * Math.sin(rotation + Math.PI / 2);
+    // // add rotation
+    // const rotation = toRadians(this.chart.options.rotation) % (Math.PI * 2.0);
+    // dx += bottomMargin * Math.cos(rotation + Math.PI / 2);
+    // dy += bottomMargin * Math.sin(rotation + Math.PI / 2);
+    dx += (offsetX / 100) * this.outerRadius;
+    dy += (offsetY / 100) * this.outerRadius;
 
     // draw
-    ctx.save();
     ctx.translate(dx, dy);
 
     // draw background
+    ctx.fillStyle = backgroundColor;
     ctx.beginPath();
     addRoundedRectPath(ctx, {
-      x, y, w, h, radius: borderRadius,
+      x, y, w, h, radius: toTRBLCorners(borderRadius),
     });
-    ctx.fillStyle = backgroundColor;
+    ctx.closePath();
     ctx.fill();
 
     // draw value text
-    ctx.fillStyle = color || config.options.defaultFontColor;
-    const magicNumber = 0.075; // manual testing
-    ctx.fillText(valueText, 0, textHeight * magicNumber);
-
+    // ctx.fillStyle = color || config.options.defaultFontColor;
+    // const magicNumber = 0.075; // manual testing
+    // ctx.fillText(valueText, 0, textHeight * magicNumber);
+    ctx.fillStyle = color;
+    renderText(ctx, valueText, 0, 0, font, {});
     ctx.restore();
   }
 
@@ -298,7 +298,7 @@ GaugeController.defaults = {
     color: 'rgba(0, 0, 0, 1)',
   },
   valueLabel: {
-    fontSize: undefined,
+    font: undefined,
     display: true,
     formatter: null,
     color: 'rgba(255, 255, 255, 1)',
@@ -310,7 +310,8 @@ GaugeController.defaults = {
       bottom: 5,
       left: 5,
     },
-    bottomMarginPercentage: 5,
+    offsetX: 20,
+    offsetY: -20,
   },
   animation: {
     duration: 1000,

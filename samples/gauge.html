@@ -18,10 +18,11 @@
 
 <body>
   <div id="canvas-holder" style="width:100%">
-  <canvas id="chart"></canvas>
+  <canvas id="chart" style="height: 500px"></canvas>
   </div>
   <button id="randomizeData">Randomize Data</button>
   <button id="needleStyle1">Needle Style 1</button>
+  <button id="valueLabelStyle1">Value Label Style 1</button>
   <script>
     const CHART_COLORS = {
       red: 'rgb(255, 99, 132)',
@@ -75,7 +76,7 @@
           }
         },
         valueLabel: {
-          formatter: Math.round
+          formatter: Math.round,
         }
       }
     };
@@ -105,6 +106,21 @@
         // The color of the needle
         color: CHART_COLORS.blue,
       };
+
+      window.myGauge.update();
+    });
+    document.getElementById('valueLabelStyle1').addEventListener('click', function() {
+      config.options.valueLabel = {
+        formatter: Math.round,
+        color: CHART_COLORS.green,
+        backgroundColor: CHART_COLORS.purple,
+        font: {
+          size: 60,
+        },
+        offsetX: 0,
+        offsetY: 40,
+      };
+      config.options.layout.padding.bottom = 200,
 
       window.myGauge.update();
     });
