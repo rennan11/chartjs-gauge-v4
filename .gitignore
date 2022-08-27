@@ -2,3 +2,5 @@ dist/**/*
 modules/**/*
 node_modules/**/*
 temp/**/*
+test-result/**/*
+

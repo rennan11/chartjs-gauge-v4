@@ -1,11 +1,14 @@
-const commonjs = require('rollup-plugin-commonjs'); // eslint-disable-line import/no-extraneous-dependencies
-const resolve = require('rollup-plugin-node-resolve'); // eslint-disable-line import/no-extraneous-dependencies
-const istanbul = require('rollup-plugin-istanbul'); // eslint-disable-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
+const commonjs = require('rollup-plugin-commonjs');
+const resolve = require('rollup-plugin-node-resolve');
+const istanbul = require('rollup-plugin-istanbul');
+const yargs = require('yargs');
 const builds = require('./rollup.config');
 
 module.exports = (karma) => {
-  const args = karma.args || {};
-
+  const args = yargs
+    .option('verbose', { default: false })
+    .argv;
   // Use the same rollup config as our dist files: when debugging (--watch),
   // we will prefer the unminified build which is easier to browse and works
   // better with source mapping. In other cases, pick the minified build to
@@ -19,7 +22,7 @@ module.exports = (karma) => {
 
   karma.set({
     frameworks: ['jasmine'],
-    reporters: ['progress'],
+    reporters: ['junit', 'spec'],
     browsers: ['chrome', 'firefox'],
     // browsers: ['chrome'],
     // browsers: ['chromeheadless'],
@@ -85,6 +88,10 @@ module.exports = (karma) => {
     // [Firefox 56.0.0 (Linux 0.0.0)]: Disconnected (1 times), because no message in 10000 ms.
     // https://github.com/jasmine/jasmine/issues/1327#issuecomment-332939551
     browserDisconnectTolerance: 3,
+
+    junitReporter: {
+      outputDir: 'test-result/junit/',
+    },
   });
 
   // https://swizec.com/blog/how-to-run-javascript-tests-in-chrome-on-travis/swizec/6647
@@ -95,7 +102,7 @@ module.exports = (karma) => {
   if (args.coverage) {
     karma.reporters.push('coverage');
     karma.coverageReporter = {
-      dir: 'coverage/',
+      dir: 'test-result/coverage/',
       reporters: [
         { type: 'html', subdir: 'html' },
         { type: 'lcovonly', subdir: '.' },
