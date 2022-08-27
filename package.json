@@ -1,7 +1,7 @@
 {
   "name": "chartjs-gauge-v3",
   "description": "Gauge chart for chart.js v3",
-  "homepage": "https://github.com/haiiaaa/chartjs-gauge/",
+  "homepage": "https://github.com/uk-taniyama/chartjs-gauge/",
   "version": "3.0.0-alpha.1",
   "licence": "MIT",
   "jsdelivr": "dist/chartjs-gauge.min.js",
@@ -16,10 +16,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/haiiaaa/chartjs-gauge.git"
+    "url": "https://github.com/uk-taniyama/chartjs-gauge"
   },
   "bugs": {
-    "url": "https://github.com/haiiaaa/chartjs-gauge/issues"
+    "url": "https://github.com/uk-taniyama/chartjs-gauge/issues"
   },
   "dependencies": {
     "chart.js": "^3.9.1"
@@ -32,6 +32,7 @@
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "http-browser": "^0.1.31",
     "karma": "^6.4.0",
     "karma-chrome-launcher": "^3.1.1",
     "karma-coverage": "^2.2.0",
@@ -42,6 +43,7 @@
     "karma-spec-reporter": "^0.0.34",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.37",
+    "npm-run-all": "^4.1.5",
     "rollup": "^2.78.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
@@ -54,6 +56,8 @@
     "build": "rollup -c",
     "build:watch": "rollup -c --watch",
     "lint": "eslint src",
+    "start": "npm-run-all server build:watch",
+    "server": "http-server .",
     "t": "karma start karma.conf.js --single-run --coverage --browsers chromeheadless",
     "test": "karma start karma.conf.js",
     "test:html": "karma start karma.conf.js --reporters progress,kjhtml",
