@@ -80,7 +80,6 @@ class GaugeController extends DoughnutController {
       ctx,
     } = this.chart;
     const {
-      innerRadius,
       outerRadius,
     } = this;
     const {
@@ -90,10 +89,9 @@ class GaugeController extends DoughnutController {
       color,
     } = this.options.needle;
 
-    const width = this.getWidth(this.chart);
-    const needleRadius = (radiusPercentage / 100) * width;
-    const needleWidth = (widthPercentage / 100) * width;
-    const needleLength = (lengthPercentage / 100) * (outerRadius - innerRadius) + innerRadius;
+    const needleRadius = (radiusPercentage / 100) * outerRadius;
+    const needleWidth = (widthPercentage / 100) * outerRadius;
+    const needleLength = (lengthPercentage / 100) * outerRadius;
 
     // center
     const { dx, dy } = this.getTranslation();
@@ -290,11 +288,11 @@ GaugeController.version = version;
 
 GaugeController.defaults = {
   needle: {
-    // Needle circle radius as the percentage of the chart area width
-    radiusPercentage: 2,
-    // Needle width as the percentage of the chart area width
-    widthPercentage: 3.2,
-    // Needle length as the percentage of the interval between inner radius (0%) and outer radius (100%) of the arc
+    // Needle circle radius as the percentage of the chart radius
+    radiusPercentage: 10,
+    // Needle width as the percentage of the chart radius
+    widthPercentage: 15,
+    // Needle length as the percentage of the chart radius
     lengthPercentage: 80,
     // The color of the needle
     color: 'rgba(0, 0, 0, 1)',
