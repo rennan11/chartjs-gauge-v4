@@ -21,17 +21,26 @@
   <canvas id="chart" style="height: 500px"></canvas>
   </div>
   <button id="randomizeData">Randomize Data</button>
+  <button id="guageStyle1">Guage Style 1</button>
   <button id="needleStyle1">Needle Style 1</button>
   <button id="valueLabelStyle1">Value Label Style 1</button>
   <script>
     const CHART_COLORS = {
-      red: 'rgb(255, 99, 132)',
-      orange: 'rgb(255, 159, 64)',
-      yellow: 'rgb(255, 205, 86)',
-      green: 'rgb(75, 192, 192)',
-      blue: 'rgb(54, 162, 235)',
-      purple: 'rgb(153, 102, 255)',
-      grey: 'rgb(201, 203, 207)'
+      // red: 'rgb(255, 99, 132)',
+      // orange: 'rgb(255, 159, 64)',
+      // yellow: 'rgb(255, 205, 86)',
+      // green: 'rgb(75, 192, 192)',
+      // blue: 'rgb(54, 162, 235)',
+      // purple: 'rgb(153, 102, 255)',
+      // grey: 'rgb(201, 203, 207)',
+      red: "#ff6384",
+      orange: "#ff9f40",
+      yellow: "#ffcd56",
+      green: "#4bc0c0",
+      blue: "#36a2eb",
+      purple: "#9966ff",
+      grey: "#c9cbcf",
+      black: '#404244',
     };
     var randomScalingFactor = function() {
       return Math.round(Math.random() * 100);
@@ -95,6 +104,13 @@
       window.myGauge.update();
     });
 
+    document.getElementById('guageStyle1').addEventListener('click', function() {
+      config.options.cutout = '40%';
+      config.options.rotation = -100;
+      config.options.circumference = 200;
+      window.myGauge.update();
+    });
+
     document.getElementById('needleStyle1').addEventListener('click', function() {
       config.options.needle = {
         // Needle circle radius as the percentage of the chart radius
@@ -109,12 +125,13 @@
 
       window.myGauge.update();
     });
+
     document.getElementById('valueLabelStyle1').addEventListener('click', function() {
       config.options.valueLabel = {
         formatter: Math.round,
-        color: CHART_COLORS.green,
-        backgroundColor: CHART_COLORS.blue,
-        borderColor: CHART_COLORS.purple,
+        color: CHART_COLORS.blue,
+        borderColor: CHART_COLORS.blue,
+        backgroundColor: CHART_COLORS.blue+'40',
         borderWidth: 10,
         font: {
           size: 60,

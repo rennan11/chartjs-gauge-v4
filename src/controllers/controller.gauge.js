@@ -5,23 +5,24 @@ import {
 } from 'chart.js/helpers';
 import { version } from '../../package.json';
 
-
 class GaugeController extends DoughnutController {
   constructor(chart, datasetIndex) {
     super(chart, datasetIndex);
+    // center for needle.
     this.center = new ArcElement();
-  }
-
-  // TODO テスト時に通らないこともある模様......
-  parse(start, count) {
-    super.parse(start, count);
-    this._updateMeta();
   }
 
   _updateMeta() {
     const meta = this._cachedMeta;
     const data = meta._parsed;
-    const { value, minValue = 0 } = this.getDataset();
+    if (data.length === 0) {
+      meta._guage = {
+        values: [],
+        valuePercent: 0,
+      };
+    }
+
+    const { value = 0, minValue = 0 } = this.getDataset();
     const maxValue = data.length > 0 ? data[data.length - 1] : minValue + 1;
 
     const values = [];
@@ -34,25 +35,7 @@ class GaugeController extends DoughnutController {
     meta._guage = { values, valuePercent };
   }
 
-  // getValuePercent({ minValue, data }, value) {
-  //   const min = minValue || 0;
-  //   const max = data.reduce((prev, curr) => prev + curr, min);
-  //   const length = max - min;
-  //   const percent = (value - min) / length;
-  //   return percent;
-  // }
-
-  getWidth(chart) {
-    return chart.chartArea.right - chart.chartArea.left;
-  }
-
   getTranslation() {
-    // const { chartArea, offsetX, offsetY } = chart;
-    // const centerX = (chartArea.left + chartArea.right) / 2;
-    // const centerY = (chartArea.top + chartArea.bottom) / 2;
-    // const dx = (centerX + offsetX);
-    // const dy = (centerY + offsetY);
-    // TODO use center. but invalid data....
     const zero = this._cachedMeta.data[0];
     if (zero == null) {
       return { dx: 0, dy: 0 };
@@ -60,9 +43,9 @@ class GaugeController extends DoughnutController {
     return { dx: zero.x, dy: zero.y };
   }
 
-  getAngle({ chart, valuePercent }) {
-    const { rotation, circumference } = chart.options;
-    return rotation + (circumference * valuePercent);
+  getAngle(valuePercent) {
+    const { rotation, circumference } = this.chart.options;
+    return toRadians(rotation + (circumference * valuePercent));
   }
 
   getSize(value) {
@@ -100,19 +83,12 @@ class GaugeController extends DoughnutController {
     const { dx, dy } = this.getTranslation();
 
     // interpolate
-    // const origin = this.getAngle({ chart: this.chart, valuePercent: previous ? previous.valuePercent : 0 });
-    // // TODO valuePercent is in current.valuePercent also
-    // const target = this.getAngle({ chart: this.chart, valuePercent: this.getValuePercent(dataset, dataset.value) });
-    // const angle = origin + (target - origin) * ease;
-    const angle = this.getAngle({
-      chart: this.chart,
-      valuePercent: this.center.endAngle,
-    });
+    const angle = this.getAngle(this.center.endAngle);
 
     // draw
     ctx.save();
     ctx.translate(dx, dy);
-    ctx.rotate(toRadians(angle - 90));
+    ctx.rotate(angle);
     ctx.fillStyle = color;
 
     // draw circle
@@ -122,9 +98,9 @@ class GaugeController extends DoughnutController {
 
     // draw needle
     ctx.beginPath();
-    ctx.moveTo(0, needleWidth / 2);
-    ctx.lineTo(needleLength, 0);
-    ctx.lineTo(0, -needleWidth / 2);
+    ctx.moveTo(-needleWidth / 2, 0);
+    ctx.lineTo(0, -needleLength);
+    ctx.lineTo(needleWidth / 2, 0);
     ctx.fill();
 
     ctx.restore();
@@ -159,7 +135,6 @@ class GaugeController extends DoughnutController {
 
     // const { width: textWidth, actualBoundingBoxAscent, actualBoundingBoxDescent } = ctx.measureText(valueText);
     // const textHeight = actualBoundingBoxAscent + actualBoundingBoxDescent;
-
     const { width: textWidth } = ctx.measureText(valueText);
     // approximate height until browsers support advanced TextMetrics
     // const textHeight = Math.max(ctx.measureText('m').width, ctx.measureText('\uFF37').width);
@@ -171,11 +146,7 @@ class GaugeController extends DoughnutController {
     const h = (padding.top + textHeight + padding.bottom) + 2 * borderWidth;
 
     // center
-    let { dx, dy } = this.getTranslation(this.chart);
-    // // add rotation
-    // const rotation = toRadians(this.chart.options.rotation) % (Math.PI * 2.0);
-    // dx += bottomMargin * Math.cos(rotation + Math.PI / 2);
-    // dy += bottomMargin * Math.sin(rotation + Math.PI / 2);
+    let { dx, dy } = this.getTranslation();
     dx += this.getSize(offsetX);
     dy += this.getSize(offsetY);
 
@@ -197,11 +168,9 @@ class GaugeController extends DoughnutController {
     }
 
     // draw value text
-    // ctx.fillStyle = color || config.options.defaultFontColor;
-    // const magicNumber = 0.075; // manual testing
-    // ctx.fillText(valueText, 0, textHeight * magicNumber);
+    const magicNumber = 0.075; // manual testing
     ctx.fillStyle = color;
-    renderText(ctx, valueText, 0, 0, font, {});
+    renderText(ctx, valueText, 0, textHeight * magicNumber, font, {});
     ctx.restore();
   }
 
@@ -210,24 +179,17 @@ class GaugeController extends DoughnutController {
     const reset = mode === 'reset';
 
     const meta = this._cachedMeta;
-    if (meta._guage == null) {
-      this._updateMeta();
-    }
+    this._updateMeta();
 
-    const initialValue = {
-      valuePercent: 0,
-    };
+    const initialValue = 0;
 
     // animations on will call update(reset) before update()
     if (reset) {
-      meta.previous = { valuePercent: 0 };
+      meta.previous = initialValue;
       meta.current = initialValue;
     } else {
-      // dataset.data.sort((a, b) => a - b);
       meta.previous = meta.current || initialValue;
-      meta.current = {
-        valuePercent: meta._guage.valuePercent,
-      };
+      meta.current = meta._guage.valuePercent;
     }
 
     const parsed = meta._parsed;
@@ -252,8 +214,8 @@ class GaugeController extends DoughnutController {
     super.updateElement(this.center, undefined, {
       x: zero.x,
       y: zero.y,
-      startAngle: meta.previous.valuePercent,
-      endAngle: meta.current.valuePercent,
+      startAngle: meta.previous,
+      endAngle: meta.current,
       circumference: 0,
       outerRadius: 100,
       innerRadius: 0,
@@ -261,30 +223,12 @@ class GaugeController extends DoughnutController {
     }, mode);
   }
 
-  // updateElement(arc, index, properties, reset) {
-  //   // TODO handle reset and options.animation
-  //   super.updateElement(arc, index, properties, reset);
-  //   const dataset = this.getDataset();
-  //   const { data } = dataset;
-  //   // const { options } = this.chart.config;
-  //   // scale data
-  //   const previousValue = index === 0 ? dataset.minValue : data[index - 1];
-  //   const value = data[index];
-  //   const startAngle = this.getAngle({ chart: this.chart, valuePercent: this.getValuePercent(dataset, previousValue) });
-  //   const endAngle = this.getAngle({ chart: this.chart, valuePercent: this.getValuePercent(dataset, value) });
-  //   const circumference = endAngle - startAngle;
-
-  //   arc._model = {
-  //     ...arc._model,
-  //     startAngle,
-  //     endAngle,
-  //     circumference,
-  //   };
-  // }
-
   draw() {
     super.draw();
 
+    if (this._cachedMeta._guage.values.length === 0) {
+      return;
+    }
     this.drawNeedle();
     this.drawValueLabel();
   }
@@ -320,8 +264,8 @@ GaugeController.defaults = {
       bottom: 5,
       left: 5,
     },
-    offsetX: '20%',
-    offsetY: '-20%',
+    offsetX: 0,
+    offsetY: 0,
   },
   animation: {
     duration: 1000,
