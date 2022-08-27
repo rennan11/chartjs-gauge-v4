@@ -21,7 +21,8 @@ module.exports = (karma) => {
     frameworks: ['jasmine'],
     reporters: ['progress'],
     browsers: ['chrome', 'firefox'],
-    // browsers: ['ChromeHeadless'],
+    // browsers: ['chrome'],
+    // browsers: ['chromeheadless'],
     logLevel: karma.LOG_WARN,
 
     // Explicitly disable hardware acceleration to make image
@@ -32,6 +33,9 @@ module.exports = (karma) => {
         base: 'Chrome',
         flags: [
           '--disable-accelerated-2d-canvas',
+          '--disable-background-timer-throttling',
+          '--disable-backgrounding-occluded-windows',
+          '--disable-renderer-backgrounding',
         ],
       },
       firefox: {
@@ -40,10 +44,16 @@ module.exports = (karma) => {
           'layers.acceleration.disabled': true,
         },
       },
+      chromeheadless: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox'],
+      },
     },
 
     files: [
-      { pattern: 'node_modules/chart.js/dist/Chart.bundle.min.js', watched: false },
+      { pattern: 'node_modules/moment/min/moment.min.js', watched: false },
+      { pattern: 'node_modules/moment-timezone/builds/moment-timezone-with-data.min.js', watched: false },
+      { pattern: 'node_modules/chart.js/dist/chart.js', watched: false },
       { pattern: 'modules/chart.js/test/index.js', watched: false },
       'src/index.js', // watch throws
     ].concat(args.inputs || ['test/specs/**/*.js']),

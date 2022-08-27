@@ -37,10 +37,10 @@ describe('Chart.controllers.gauge', () => {
 
     const meta = chart.getDatasetMeta(0);
     expect(meta.data.length).toBe(4); // 4 rectangles created
-    expect(meta.data[0] instanceof Chart.elements.Arc).toBe(true);
-    expect(meta.data[1] instanceof Chart.elements.Arc).toBe(true);
-    expect(meta.data[2] instanceof Chart.elements.Arc).toBe(true);
-    expect(meta.data[3] instanceof Chart.elements.Arc).toBe(true);
+    expect(meta.data[0] instanceof Chart.elements.ArcElement).toBe(true);
+    expect(meta.data[1] instanceof Chart.elements.ArcElement).toBe(true);
+    expect(meta.data[2] instanceof Chart.elements.ArcElement).toBe(true);
+    expect(meta.data[3] instanceof Chart.elements.ArcElement).toBe(true);
   });
 
   it('should scale values', () => {
@@ -53,8 +53,8 @@ describe('Chart.controllers.gauge', () => {
         }],
       },
       options: {
-        rotation: -Math.PI,
-        circumference: Math.PI,
+        rotation: -90,
+        circumference: 180,
       },
     });
 
@@ -68,9 +68,9 @@ describe('Chart.controllers.gauge', () => {
       { c: Math.PI / 4, s: -Math.PI / 2, e: -Math.PI / 4 },
       { c: Math.PI / 4, s: -Math.PI / 4, e: 0 },
     ].forEach((expected, i) => {
-      expect(meta.data[i]._model.circumference).toBeCloseTo(expected.c, 8, `circumference ${i}`);
-      expect(meta.data[i]._model.startAngle).toBeCloseTo(expected.s, 8, `startAngle ${i}`);
-      expect(meta.data[i]._model.endAngle).toBeCloseTo(expected.e, 8, `endAngle ${i}`);
+      expect(meta.data[i].circumference).toBeCloseTo(expected.c, 8, `circumference ${i}`);
+      expect(meta.data[i].startAngle).toBeCloseTo(expected.s, 8, `startAngle ${i}`);
+      expect(meta.data[i].endAngle).toBeCloseTo(expected.e, 8, `endAngle ${i}`);
     });
   });
 
@@ -85,8 +85,8 @@ describe('Chart.controllers.gauge', () => {
         }],
       },
       options: {
-        rotation: -Math.PI,
-        circumference: Math.PI,
+        rotation: -90,
+        circumference: 180,
       },
     });
 
@@ -100,9 +100,9 @@ describe('Chart.controllers.gauge', () => {
       { c: Math.PI / 4, s: -Math.PI / 2, e: -Math.PI / 4 },
       { c: Math.PI / 4, s: -Math.PI / 4, e: 0 },
     ].forEach((expected, i) => {
-      expect(meta.data[i]._model.circumference).toBeCloseTo(expected.c, 8, `circumference ${i}`);
-      expect(meta.data[i]._model.startAngle).toBeCloseTo(expected.s, 8, `startAngle ${i}`);
-      expect(meta.data[i]._model.endAngle).toBeCloseTo(expected.e, 8, `endAngle ${i}`);
+      expect(meta.data[i].circumference).toBeCloseTo(expected.c, 8, `circumference ${i}`);
+      expect(meta.data[i].startAngle).toBeCloseTo(expected.s, 8, `startAngle ${i}`);
+      expect(meta.data[i].endAngle).toBeCloseTo(expected.e, 8, `endAngle ${i}`);
     });
   });
 });

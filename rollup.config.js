@@ -1,12 +1,13 @@
 const babel = require('rollup-plugin-babel');
 const { terser } = require('rollup-plugin-terser');
+const json = require('@rollup/plugin-json');
 const pkg = require('./package.json');
 
 const input = 'src/index.js';
 const banner = `/*!
- * chartjs-gauge.js v${pkg.version}
+ * ${pkg.name} v${pkg.version}
  * ${pkg.homepage}
- * (c) ${new Date().getFullYear()} chartjs-gauge.js Contributors
+ * (c) ${new Date().getFullYear()} ${pkg.name} Contributors
  * Released under the MIT License
  */`;
 
@@ -17,6 +18,7 @@ module.exports = [
   {
     input,
     plugins: [
+      json(),
       babel({
         exclude: 'node_modules/**',
       }),
@@ -29,15 +31,18 @@ module.exports = [
       indent: false,
       globals: {
         'chart.js': 'Chart',
+        'chart.js/helpers': 'Chart.helpers',
       },
     },
     external: [
       'chart.js',
+      'chart.js/helpers',
     ],
   },
   {
     input,
     plugins: [
+      json(),
       babel({
         exclude: 'node_modules/**',
       }),
@@ -54,10 +59,12 @@ module.exports = [
       indent: false,
       globals: {
         'chart.js': 'Chart',
+        'chart.js/helpers': 'Chart.helpers',
       },
     },
     external: [
       'chart.js',
+      'chart.js/helpers',
     ],
   },
 ];
