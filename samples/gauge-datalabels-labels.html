@@ -5,9 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gauge Chart with datalabels plugin displaying labels</title>
-  <script src="../node_modules/chart.js/dist/Chart.bundle.js"></script>
+  <script src="../node_modules/chart.js/dist/chart.js"></script>
   <script src="../dist/chartjs-gauge.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <style>
   canvas {
     -moz-user-select: none;
@@ -23,6 +23,7 @@
   </div>
   <button id="randomizeData">Randomize Data</button>
   <script>
+    Chart.register(ChartDataLabels)
     var randomScalingFactor = function() {
       return Math.round(Math.random() * 100);
     };
@@ -33,7 +34,7 @@
         randomScalingFactor(),
         randomScalingFactor(),
         randomScalingFactor()
-      ];
+      ].sort((a, b) => a - b);
     };
 
     var randomValue = function (data) {
@@ -81,7 +82,7 @@
         plugins: {
           datalabels: {
             display: true,
-            formatter:  function (value, context) {
+            formatter: function (value, context) {
               return context.chart.data.labels[context.dataIndex];
             },
             //color: function (context) {

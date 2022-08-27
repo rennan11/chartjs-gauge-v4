@@ -5,22 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gauge Chart</title>
-  <script src="../node_modules/chart.js/dist/Chart.bundle.js"></script>
+  <script src="../node_modules/chart.js/dist/chart.js"></script>
   <script src="../dist/chartjs-gauge.js"></script>
   <style>
-    canvas {
-      -moz-user-select: none;
-      -webkit-user-select: none;
-      -ms-user-select: none;
-    }
+  canvas {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
   </style>
 </head>
 
 <body>
   <div id="canvas-holder" style="width:100%">
-    <canvas id="chart"></canvas>
+  <canvas id="chart"></canvas>
   </div>
   <button id="randomizeData">Randomize Data</button>
+  <button id="needleStyle1">Needle Style 1</button>
   <script>
     var randomScalingFactor = function() {
       return Math.round(Math.random() * 100);
@@ -32,7 +33,7 @@
         randomScalingFactor(),
         randomScalingFactor(),
         randomScalingFactor()
-      ];
+      ].sort((a, b) => a - b);
     };
 
     var randomValue = function (data) {
@@ -45,7 +46,7 @@
     var config = {
       type: 'gauge',
       data: {
-        //labels: ['Success', 'Warning', 'Warning', 'Error'],
+        //labels: ['Success', 'Warning', 'Warning', 'Fail'],
         datasets: [{
           data: data,
           value: value,
@@ -64,16 +65,16 @@
             bottom: 30
           }
         },
-        needle: {
-          // Needle circle radius as the percentage of the chart area width
-          radiusPercentage: 2,
-          // Needle width as the percentage of the chart area width
-          widthPercentage: 3.2,
-          // Needle length as the percentage of the interval between inner radius (0%) and outer radius (100%) of the arc
-          lengthPercentage: 80,
-          // The color of the needle
-          color: 'rgba(0, 0, 0, 1)'
-        },
+        // needle: {
+        //   // Needle circle radius as the percentage of the chart area width
+        //   radiusPercentage: 2,
+        //   // Needle width as the percentage of the chart area width
+        //   widthPercentage: 3.2,
+        //   // Needle length as the percentage of the interval between inner radius (0%) and outer radius (100%) of the arc
+        //   lengthPercentage: 80,
+        //   // The color of the needle
+        //   color: 'rgba(0, 0, 0, 1)'
+        // },
         valueLabel: {
           formatter: Math.round
         }
@@ -90,6 +91,21 @@
         dataset.data = randomData();
         dataset.value = randomValue(dataset.data);
       });
+
+      window.myGauge.update();
+    });
+
+    document.getElementById('needleStyle1').addEventListener('click', function() {
+      config.options.needle = {
+        // Needle circle radius as the percentage of the chart area width
+        radiusPercentage: 2,
+        // Needle width as the percentage of the chart area width
+        widthPercentage: 1,
+        // Needle length as the percentage of the interval between inner radius (0%) and outer radius (100%) of the arc
+        lengthPercentage: 80,
+        // The color of the needle
+        color: '#FF00FF',
+      };
 
       window.myGauge.update();
     });
