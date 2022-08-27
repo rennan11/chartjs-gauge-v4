@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { DoughnutController, ArcElement } from 'chart.js';
 import {
-  addRoundedRectPath, renderText, toFont, toRadians, toTRBLCorners,
+  addRoundedRectPath, renderText, toFont, toPercentage, toRadians, toTRBLCorners,
 } from 'chart.js/helpers';
 import { version } from '../../package.json';
 
@@ -65,6 +65,10 @@ class GaugeController extends DoughnutController {
     return rotation + (circumference * valuePercent);
   }
 
+  getSize(value) {
+    return toPercentage(value, this.outerRadius) * this.outerRadius;
+  }
+
   /* TODO set min padding, not applied until chart.update() (also chartArea must have been set)
   setBottomPadding(chart) {
     const needleRadius = this.getNeedleRadius(chart);
@@ -82,18 +86,15 @@ class GaugeController extends DoughnutController {
       ctx,
     } = this.chart;
     const {
-      outerRadius,
-    } = this;
-    const {
-      radiusPercentage,
-      widthPercentage,
-      lengthPercentage,
+      radius,
+      width,
+      length,
       color,
     } = this.options.needle;
 
-    const needleRadius = (radiusPercentage / 100) * outerRadius;
-    const needleWidth = (widthPercentage / 100) * outerRadius;
-    const needleLength = (lengthPercentage / 100) * outerRadius;
+    const needleRadius = this.getSize(radius);
+    const needleWidth = this.getSize(width);
+    const needleLength = this.getSize(length);
 
     // center
     const { dx, dy } = this.getTranslation();
@@ -139,6 +140,8 @@ class GaugeController extends DoughnutController {
       color,
       formatter,
       backgroundColor,
+      borderColor,
+      borderWidth,
       borderRadius,
       padding,
       offsetX,
@@ -162,10 +165,10 @@ class GaugeController extends DoughnutController {
     // const textHeight = Math.max(ctx.measureText('m').width, ctx.measureText('\uFF37').width);
     const { lineHeight: textHeight } = font;
 
-    const x = -(padding.left + textWidth / 2);
-    const y = -(padding.top + textHeight / 2);
-    const w = (padding.left + textWidth + padding.right);
-    const h = (padding.top + textHeight + padding.bottom);
+    const x = -(padding.left + textWidth / 2) - borderWidth;
+    const y = -(padding.top + textHeight / 2) - borderWidth;
+    const w = (padding.left + textWidth + padding.right) + 2 * borderWidth;
+    const h = (padding.top + textHeight + padding.bottom) + 2 * borderWidth;
 
     // center
     let { dx, dy } = this.getTranslation(this.chart);
@@ -173,8 +176,8 @@ class GaugeController extends DoughnutController {
     // const rotation = toRadians(this.chart.options.rotation) % (Math.PI * 2.0);
     // dx += bottomMargin * Math.cos(rotation + Math.PI / 2);
     // dy += bottomMargin * Math.sin(rotation + Math.PI / 2);
-    dx += (offsetX / 100) * this.outerRadius;
-    dy += (offsetY / 100) * this.outerRadius;
+    dx += this.getSize(offsetX);
+    dy += this.getSize(offsetY);
 
     // draw
     ctx.translate(dx, dy);
@@ -187,6 +190,11 @@ class GaugeController extends DoughnutController {
     });
     ctx.closePath();
     ctx.fill();
+    if (borderWidth) {
+      ctx.strokeStyle = borderColor;
+      ctx.lineWidth = borderWidth;
+      ctx.stroke();
+    }
 
     // draw value text
     // ctx.fillStyle = color || config.options.defaultFontColor;
@@ -289,11 +297,11 @@ GaugeController.version = version;
 GaugeController.defaults = {
   needle: {
     // Needle circle radius as the percentage of the chart radius
-    radiusPercentage: 10,
+    radius: '10%',
     // Needle width as the percentage of the chart radius
-    widthPercentage: 15,
+    width: '15%',
     // Needle length as the percentage of the chart radius
-    lengthPercentage: 80,
+    length: '80%',
     // The color of the needle
     color: 'rgba(0, 0, 0, 1)',
   },
@@ -304,14 +312,16 @@ GaugeController.defaults = {
     color: 'rgba(255, 255, 255, 1)',
     backgroundColor: 'rgba(0, 0, 0, 1)',
     borderRadius: 5,
+    borderColor: null,
+    borderWidth: 0,
     padding: {
       top: 5,
       right: 5,
       bottom: 5,
       left: 5,
     },
-    offsetX: 20,
-    offsetY: -20,
+    offsetX: '20%',
+    offsetY: '-20%',
   },
   animation: {
     duration: 1000,

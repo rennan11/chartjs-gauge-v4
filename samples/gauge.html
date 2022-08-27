@@ -98,11 +98,11 @@
     document.getElementById('needleStyle1').addEventListener('click', function() {
       config.options.needle = {
         // Needle circle radius as the percentage of the chart radius
-        radiusPercentage: 10,
+        radius: '10%',
         // Needle width as the percentage of the chart radius
-        widthPercentage: 20,
+        width: '20%',
         // Needle length as the percentage of the chart radius
-        lengthPercentage: 80,
+        length: '80%',
         // The color of the needle
         color: CHART_COLORS.blue,
       };
@@ -113,12 +113,14 @@
       config.options.valueLabel = {
         formatter: Math.round,
         color: CHART_COLORS.green,
-        backgroundColor: CHART_COLORS.purple,
+        backgroundColor: CHART_COLORS.blue,
+        borderColor: CHART_COLORS.purple,
+        borderWidth: 10,
         font: {
           size: 60,
         },
         offsetX: 0,
-        offsetY: 40,
+        offsetY: 100,
       };
       config.options.layout.padding.bottom = 200,
 
