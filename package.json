@@ -67,6 +67,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.4.0",
+    "typedoc-plugin-markdown": "^3.13.4",
     "typescript": "^4.8.2",
     "yargs": "^17.5.1"
   },
@@ -78,6 +79,7 @@
     "build:watch": "rollup -c --watch",
     "build:docs": "node src/tools/mkdocs.js",
     "build:dts": "tsc -P tsconfig.dts.json",
+    "docs": "typedoc src/index.ts",
     "lint": "eslint src",
     "start": "npm-run-all server build:watch",
     "server": "http-server .",

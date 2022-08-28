@@ -32,9 +32,9 @@
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json"],
 
   "typedocOptions": {
-    "name": "TSLibrary",
     "out": "./docs",
     "theme": "default",
+    "plugin": "typedoc-plugin-markdown",
     "excludeExternals": true,
     "excludePrivate": true,
     "includeVersion": true,
