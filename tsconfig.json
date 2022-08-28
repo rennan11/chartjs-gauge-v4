@@ -36,6 +36,7 @@
     "theme": "default",
     "plugin": "typedoc-plugin-markdown",
     "githubPages": false,
+    "disableSources": true,
     "excludeExternals": true,
     "excludePrivate": true,
     "includeVersion": true,

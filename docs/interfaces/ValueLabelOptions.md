@@ -26,10 +26,6 @@
 
 The background color of the label.
 
-#### Defined in
-
-[controllers/controller.gauge.ts:78](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L78)
-
 ___
 
 ### borderColor
@@ -37,10 +33,6 @@ ___
 • **borderColor**: `Color`
 
 The border color of the label.
-
-#### Defined in
-
-[controllers/controller.gauge.ts:83](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L83)
 
 ___
 
@@ -54,10 +46,6 @@ The border radius of the label.
 
 5
 
-#### Defined in
-
-[controllers/controller.gauge.ts:94](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L94)
-
 ___
 
 ### borderWidth
@@ -66,10 +54,6 @@ ___
 
 The border width of the label.
 
-#### Defined in
-
-[controllers/controller.gauge.ts:88](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L88)
-
 ___
 
 ### color
@@ -77,10 +61,6 @@ ___
 • **color**: `Color`
 
 The text color of the label.
-
-#### Defined in
-
-[controllers/controller.gauge.ts:73](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L73)
 
 ___
 
@@ -94,19 +74,11 @@ If true, display the value label.
 
 true
 
-#### Defined in
-
-[controllers/controller.gauge.ts:62](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L62)
-
 ___
 
 ### font
 
 • **font**: `FontSpec`
-
-#### Defined in
-
-[controllers/controller.gauge.ts:131](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L131)
 
 ___
 
@@ -134,10 +106,6 @@ Math.round
 
 `string` \| `number`
 
-#### Defined in
-
-[controllers/controller.gauge.ts:68](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L68)
-
 ___
 
 ### offsetX
@@ -151,10 +119,6 @@ String ending with '%' means percentage of the chart radius, number means pixels
 
 0
 
-#### Defined in
-
-[controllers/controller.gauge.ts:123](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L123)
-
 ___
 
 ### offsetY
@@ -167,10 +131,6 @@ String ending with '%' means percentage of the chart radius, number means pixels
 **`Default`**
 
 0
-
-#### Defined in
-
-[controllers/controller.gauge.ts:130](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L130)
 
 ___
 
@@ -188,7 +148,3 @@ The padding of the label.
 | `left` | `number` | **`Default`**  5 |
 | `right` | `number` | **`Default`**  5 |
 | `top` | `number` | **`Default`**  5 |
-
-#### Defined in
-
-[controllers/controller.gauge.ts:99](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L99)

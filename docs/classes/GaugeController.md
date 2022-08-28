@@ -51,19 +51,11 @@
 
 DoughnutController.constructor
 
-#### Defined in
-
-[controllers/controller.gauge.ts:255](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L255)
-
 ## Properties
 
 ### center
 
 • **center**: `ArcElement`<`ArcProps`, `ArcOptions`\>
-
-#### Defined in
-
-[controllers/controller.gauge.ts:253](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L253)
 
 ___
 
@@ -77,10 +69,6 @@ ___
 | :------ | :------ |
 | `_scriptable` | (`name`: `string`) => `boolean` |
 
-#### Defined in
-
-[controllers/controller.gauge.ts:229](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L229)
-
 ___
 
 ### id
@@ -90,10 +78,6 @@ ___
 #### Overrides
 
 DoughnutController.id
-
-#### Defined in
-
-[controllers/controller.gauge.ts:225](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L225)
 
 ___
 
@@ -116,19 +100,11 @@ ___
 | `plugins.tooltip` | { `enabled`: `boolean` = false } |
 | `plugins.tooltip.enabled` | `boolean` |
 
-#### Defined in
-
-[controllers/controller.gauge.ts:233](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L233)
-
 ___
 
 ### version
 
 ▪ `Static` `Readonly` **version**: `string` = `version`
-
-#### Defined in
-
-[controllers/controller.gauge.ts:227](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L227)
 
 ## Methods
 
@@ -139,10 +115,6 @@ ___
 #### Returns
 
 `GaugeMetaExtensions`
-
-#### Defined in
-
-[controllers/controller.gauge.ts:261](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L261)
 
 ___
 
@@ -158,10 +130,6 @@ ___
 
 DoughnutController.draw
 
-#### Defined in
-
-[controllers/controller.gauge.ts:484](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L484)
-
 ___
 
 ### drawNeedle
@@ -172,10 +140,6 @@ ___
 
 `void`
 
-#### Defined in
-
-[controllers/controller.gauge.ts:317](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L317)
-
 ___
 
 ### drawValueLabel
@@ -185,10 +149,6 @@ ___
 #### Returns
 
 `void`
-
-#### Defined in
-
-[controllers/controller.gauge.ts:361](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L361)
 
 ___
 
@@ -206,10 +166,6 @@ ___
 
 `number`
 
-#### Defined in
-
-[controllers/controller.gauge.ts:295](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L295)
-
 ___
 
 ### getSize
@@ -226,10 +182,6 @@ ___
 
 `number`
 
-#### Defined in
-
-[controllers/controller.gauge.ts:301](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L301)
-
 ___
 
 ### getTranslation
@@ -244,10 +196,6 @@ ___
 | :------ | :------ |
 | `dx` | `number` |
 | `dy` | `number` |
-
-#### Defined in
-
-[controllers/controller.gauge.ts:287](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L287)
 
 ___
 
@@ -268,10 +216,6 @@ ___
 #### Overrides
 
 DoughnutController.update
-
-#### Defined in
-
-[controllers/controller.gauge.ts:437](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L437)
 
 ___
 
@@ -295,7 +239,3 @@ ___
 #### Overrides
 
 DoughnutController.updateElements
-
-#### Defined in
-
-[controllers/controller.gauge.ts:459](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L459)

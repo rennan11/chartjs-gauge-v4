@@ -27,10 +27,6 @@ Value used for the needle.
 
 0
 
-#### Defined in
-
-[controllers/controller.gauge.ts:191](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L191)
-
 ___
 
 ### value
@@ -42,7 +38,3 @@ Value used for the needle.
 **`Default`**
 
 0
-
-#### Defined in
-
-[controllers/controller.gauge.ts:185](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L185)

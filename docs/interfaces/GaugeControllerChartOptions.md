@@ -27,16 +27,8 @@ circumference: 180,
 
 • **needle**: [`NeedleOptions`](NeedleOptions.md)
 
-#### Defined in
-
-[controllers/controller.gauge.ts:161](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L161)
-
 ___
 
 ### valueLabel
 
 • **valueLabel**: [`ValueLabelOptions`](ValueLabelOptions.md)
-
-#### Defined in
-
-[controllers/controller.gauge.ts:162](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L162)

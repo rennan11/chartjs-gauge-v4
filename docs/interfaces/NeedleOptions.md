@@ -19,10 +19,6 @@
 
 The color of the needle
 
-#### Defined in
-
-[controllers/controller.gauge.ts:48](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L48)
-
 ___
 
 ### length
@@ -35,10 +31,6 @@ String ending with '%' means percentage of the chart radius, number means pixels
 **`Default`**
 
 '80%'
-
-#### Defined in
-
-[controllers/controller.gauge.ts:43](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L43)
 
 ___
 
@@ -53,10 +45,6 @@ String ending with '%' means percentage of the chart radius, number means pixels
 
 '10%'
 
-#### Defined in
-
-[controllers/controller.gauge.ts:29](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L29)
-
 ___
 
 ### width
@@ -69,7 +57,3 @@ String ending with '%' means percentage of the chart radius, number means pixels
 **`Default`**
 
 '15%'
-
-#### Defined in
-
-[controllers/controller.gauge.ts:36](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L36)
