@@ -42,6 +42,7 @@
     "chartjs-test-utils": "^0.4.0",
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "highlight.js": "^11.6.0",
     "http-browser": "^0.1.31",
