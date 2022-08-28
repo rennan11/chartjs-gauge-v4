@@ -7,6 +7,7 @@
   "jsdelivr": "dist/chartjs-gauge.min.js",
   "unpkg": "dist/chartjs-gauge.min.js",
   "main": "dist/chartjs-gauge.js",
+  "types": "dist/index.d.ts",
   "keywords": [
     "chartjs",
     "chart.js",
@@ -70,11 +71,13 @@
     "yargs": "^17.5.1"
   },
   "scripts": {
-    "prepublishOnly": "npm-run-all -s clean t build:docs build",
+    "prepublishOnly": "npm-run-all -s clean t build:all",
     "clean": "rimraf dist test-result",
     "build": "rollup -c",
+    "build:all": "npm-run-all -p build:docs build build:dts",
     "build:watch": "rollup -c --watch",
     "build:docs": "node src/tools/mkdocs.js",
+    "build:dts": "tsc -P tsconfig.dts.json",
     "lint": "eslint src",
     "start": "npm-run-all server build:watch",
     "server": "http-server .",
