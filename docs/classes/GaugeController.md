@@ -1,4 +1,4 @@
-[chartjs-gauge-v3 - v3.0.0-alpha.1](../README.md) / [Exports](../modules.md) / GaugeController
+[chartjs-gauge-v3 - v3.0.0-alpha.2](../README.md) / GaugeController
 
 # Class: GaugeController
 
