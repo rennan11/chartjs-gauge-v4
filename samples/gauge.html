@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <title>Gauge Chart</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.js"></script>
   <script src="../dist/chartjs-gauge.js"></script>
@@ -17,13 +18,14 @@
 </head>
 
 <body>
+  <a href="..">Home</a>
   <div id="canvas-holder" style="width:100%">
   <canvas id="chart" style="height: 500px"></canvas>
   </div>
-  <button id="randomizeData">Randomize Data</button>
-  <button id="guageStyle1">Guage Style 1</button>
-  <button id="needleStyle1">Needle Style 1</button>
-  <button id="valueLabelStyle1">Value Label Style 1</button>
+  <button class="btn btn-chartjs" id="randomizeData">Randomize Data</button>
+  <button class="btn btn-chartjs" id="guageStyle1">Guage Style 1</button>
+  <button class="btn btn-chartjs" id="needleStyle1">Needle Style 1</button>
+  <button class="btn btn-chartjs" id="valueLabelStyle1">Value Label Style 1</button>
   <script>
     const CHART_COLORS = {
       // red: 'rgb(255, 99, 132)',

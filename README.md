@@ -1,17 +1,25 @@
-# ![chartjs-gauge logo](./samples/logo.svg) chartjs-gauge
+# ![chartjs-gauge logo](./samples/logo.svg) chartjs-gauge-v3
 
-Simple gauge chart for [Chart.js](https://www.chartjs.org/)
+Simple gauge chart for [Chart.js](https://www.chartjs.org/) >= 3.1.0?
+
+Fork of the [chartjs-gauge](https://github.com/haiiaaa/chartjs-gauge).
 
 ## Samples
 
-- [Gauge Chart](https://codepen.io/haiiaaa/pen/rNVbmYy)
-- [Gauge Chart with datalabels plugin](https://codepen.io/haiiaaa/pen/KKpYmRz)
-- [Gauge Chart with datalabels plugin displaying labels](https://codepen.io/haiiaaa/pen/qBdwmyY)
+- [Gauge Chart](samples/gauge.html)
+- [Gauge Chart with datalabels plugin](samples/gauge-datalabels.html)
+- [Gauge Chart with datalabels plugin displaying labels](samples/gauge-datalabels-labels.html)
 
 ## Install
 
-- **yarn** install: `yarn add chart.js chartjs-gauge`
-- **npm** install: `npm install --save chart.js chartjs-gauge`
+- **yarn** install: `yarn add chart.js chartjs-gauge-v3`
+- **npm** install: `npm install --save chart.js chartjs-gauge-v3`
+
+Use the following command to see samples:
+
+```sh
+$ npx http-server node_modules/chartjs-guage-v3
+```
 
 <!---
 ## Documentation

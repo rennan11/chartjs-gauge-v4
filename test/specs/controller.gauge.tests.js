@@ -1,4 +1,8 @@
 describe('Chart.controllers.gauge', () => {
+  it(`Chart.version:${Chart.version}`, () => {
+    expect(Chart.version).toMatch(/^3./);
+  });
+
   it('should be registered as dataset controller', () => {
     expect(typeof Chart.controllers.gauge).toBe('function');
   });

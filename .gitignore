@@ -3,4 +3,6 @@ modules/**/*
 node_modules/**/*
 temp/**/*
 test-result/**/*
+*.tgz
+index.html
 

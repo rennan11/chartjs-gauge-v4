@@ -8,6 +8,10 @@ body, html {
 	margin: 0;
 }
 
+body {
+	padding: 16px 32px;
+}
+
 a {
 	color: #f27173;
 	text-decoration: none;
@@ -26,6 +30,7 @@ a:hover {
 
 .btn {
 	background-color: #aaa;
+	border: none;
 	border-radius: 4px;
 	color: white;
 	padding: 0.25rem 0.75rem;

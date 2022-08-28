@@ -14,6 +14,14 @@
     "charts",
     "gauge"
   ],
+  "files": [
+    "dist/**",
+    "samples/**",
+    "CHANGELOG.md",
+    "README.md",
+    "index.html",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/uk-taniyama/chartjs-gauge"
@@ -22,7 +30,7 @@
     "url": "https://github.com/uk-taniyama/chartjs-gauge/issues"
   },
   "dependencies": {
-    "chart.js": "^3.9.1"
+    "chart.js": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
@@ -32,6 +40,7 @@
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "highlight.js": "^11.6.0",
     "http-browser": "^0.1.31",
     "karma": "^6.4.0",
     "karma-chrome-launcher": "^3.1.1",
@@ -41,9 +50,11 @@
     "karma-junit-reporter": "^2.0.1",
     "karma-rollup-preprocessor": "^7.0.8",
     "karma-spec-reporter": "^0.0.34",
+    "marked": "^4.0.19",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.37",
     "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
     "rollup": "^2.78.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
@@ -53,14 +64,18 @@
     "yargs": "^17.5.1"
   },
   "scripts": {
+    "prepublishOnly": "npm-run-all -s clean t build:docs build",
+    "clean": "rimraf dist test-result",
     "build": "rollup -c",
     "build:watch": "rollup -c --watch",
+    "build:docs": "node src/tools/mkdocs.js",
     "lint": "eslint src",
     "start": "npm-run-all server build:watch",
     "server": "http-server .",
     "t": "karma start karma.conf.js --single-run --coverage --browsers chromeheadless",
     "test": "karma start karma.conf.js",
     "test:html": "karma start karma.conf.js --reporters progress,kjhtml",
-    "clone-chartjs": "git clone --branch v3.9.1 --depth 1 https://github.com/chartjs/Chart.js.git modules/chart.js"
+    "clean-chartjs": "rimraf modules/chart.js",
+    "clone-chartjs": "git clone --branch v3.1.0 --depth 1 https://github.com/chartjs/Chart.js.git modules/chart.js"
   }
 }

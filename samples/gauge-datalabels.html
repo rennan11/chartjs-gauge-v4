@@ -4,8 +4,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <title>Gauge Chart with datalabels plugin</title>
-  <script src="../node_modules/chart.js/dist/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.js"></script>
   <script src="../dist/chartjs-gauge.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <style>
@@ -18,10 +19,11 @@
 </head>
 
 <body>
+  <a href="..">Home</a>
   <div id="canvas-holder" style="width:100%">
   <canvas id="chart"></canvas>
   </div>
-  <button id="randomizeData">Randomize Data</button>
+  <button class="btn btn-chartjs" id="randomizeData">Randomize Data</button>
   <script>
     Chart.register(ChartDataLabels)
     var randomScalingFactor = function() {
