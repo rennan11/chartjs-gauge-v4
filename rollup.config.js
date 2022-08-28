@@ -1,9 +1,10 @@
-const babel = require('rollup-plugin-babel');
+const typescript = require('@rollup/plugin-typescript');
+const { default: resolve } = require('@rollup/plugin-node-resolve');
 const { terser } = require('rollup-plugin-terser');
 const json = require('@rollup/plugin-json');
 const pkg = require('./package.json');
 
-const input = 'src/index.js';
+const input = 'src/index.ts';
 const banner = `/*!
  * ${pkg.name} v${pkg.version}
  * ${pkg.homepage}
@@ -19,8 +20,11 @@ module.exports = [
     input,
     plugins: [
       json(),
-      babel({
-        exclude: 'node_modules/**',
+      typescript(),
+      resolve({
+        mainFields: ['module', 'main'],
+        extensions: ['.mjs', '.cjs', '.js', '.jsx', '.json', '.node'],
+        modulesOnly: true,
       }),
     ],
     output: {
@@ -43,8 +47,11 @@ module.exports = [
     input,
     plugins: [
       json(),
-      babel({
-        exclude: 'node_modules/**',
+      typescript(),
+      resolve({
+        mainFields: ['module', 'main'],
+        extensions: ['.mjs', '.cjs', '.js', '.jsx', '.json', '.node'],
+        modulesOnly: true,
       }),
       terser({
         output: {

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const commonjs = require('rollup-plugin-commonjs');
-const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
+const { default: resolve } = require('@rollup/plugin-node-resolve');
 const istanbul = require('rollup-plugin-istanbul');
 const yargs = require('yargs');
 const builds = require('./rollup.config');
@@ -58,12 +58,12 @@ module.exports = (karma) => {
       { pattern: 'node_modules/moment-timezone/builds/moment-timezone-with-data.min.js', watched: false },
       { pattern: 'node_modules/chart.js/dist/chart.js', watched: false },
       { pattern: 'modules/chart.js/test/index.js', watched: false },
-      'src/index.js', // watch throws
+      'src/index.ts', // watch throws
     ].concat(args.inputs || ['test/specs/**/*.js']),
 
     preprocessors: {
       'modules/chart.js/test/index.js': ['rollup'],
-      'src/index.js': ['sources'],
+      'src/index.ts': ['sources'],
     },
 
     rollupPreprocessor: {
