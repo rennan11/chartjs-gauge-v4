@@ -35,6 +35,7 @@
     "out": "./docs",
     "theme": "default",
     "plugin": "typedoc-plugin-markdown",
+    "githubPages": false,
     "excludeExternals": true,
     "excludePrivate": true,
     "includeVersion": true,

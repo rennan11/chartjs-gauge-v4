@@ -28,7 +28,7 @@ The background color of the label.
 
 #### Defined in
 
-[controllers/controller.gauge.ts:78](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L78)
+[controllers/controller.gauge.ts:78](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L78)
 
 ___
 
@@ -40,7 +40,7 @@ The border color of the label.
 
 #### Defined in
 
-[controllers/controller.gauge.ts:83](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L83)
+[controllers/controller.gauge.ts:83](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L83)
 
 ___
 
@@ -56,7 +56,7 @@ The border radius of the label.
 
 #### Defined in
 
-[controllers/controller.gauge.ts:94](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L94)
+[controllers/controller.gauge.ts:94](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L94)
 
 ___
 
@@ -68,7 +68,7 @@ The border width of the label.
 
 #### Defined in
 
-[controllers/controller.gauge.ts:88](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L88)
+[controllers/controller.gauge.ts:88](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L88)
 
 ___
 
@@ -80,7 +80,7 @@ The text color of the label.
 
 #### Defined in
 
-[controllers/controller.gauge.ts:73](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L73)
+[controllers/controller.gauge.ts:73](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L73)
 
 ___
 
@@ -96,7 +96,7 @@ true
 
 #### Defined in
 
-[controllers/controller.gauge.ts:62](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L62)
+[controllers/controller.gauge.ts:62](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L62)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 #### Defined in
 
-[controllers/controller.gauge.ts:131](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L131)
+[controllers/controller.gauge.ts:131](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L131)
 
 ___
 
@@ -136,7 +136,7 @@ Math.round
 
 #### Defined in
 
-[controllers/controller.gauge.ts:68](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L68)
+[controllers/controller.gauge.ts:68](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L68)
 
 ___
 
@@ -153,7 +153,7 @@ String ending with '%' means percentage of the chart radius, number means pixels
 
 #### Defined in
 
-[controllers/controller.gauge.ts:123](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L123)
+[controllers/controller.gauge.ts:123](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L123)
 
 ___
 
@@ -170,7 +170,7 @@ String ending with '%' means percentage of the chart radius, number means pixels
 
 #### Defined in
 
-[controllers/controller.gauge.ts:130](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L130)
+[controllers/controller.gauge.ts:130](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L130)
 
 ___
 
@@ -191,4 +191,4 @@ The padding of the label.
 
 #### Defined in
 
-[controllers/controller.gauge.ts:99](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L99)
+[controllers/controller.gauge.ts:99](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L99)

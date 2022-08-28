@@ -53,7 +53,7 @@ DoughnutController.constructor
 
 #### Defined in
 
-[controllers/controller.gauge.ts:255](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L255)
+[controllers/controller.gauge.ts:255](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L255)
 
 ## Properties
 
@@ -63,7 +63,7 @@ DoughnutController.constructor
 
 #### Defined in
 
-[controllers/controller.gauge.ts:253](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L253)
+[controllers/controller.gauge.ts:253](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L253)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 #### Defined in
 
-[controllers/controller.gauge.ts:229](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L229)
+[controllers/controller.gauge.ts:229](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L229)
 
 ___
 
@@ -93,7 +93,7 @@ DoughnutController.id
 
 #### Defined in
 
-[controllers/controller.gauge.ts:225](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L225)
+[controllers/controller.gauge.ts:225](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L225)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[controllers/controller.gauge.ts:233](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L233)
+[controllers/controller.gauge.ts:233](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L233)
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 #### Defined in
 
-[controllers/controller.gauge.ts:227](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L227)
+[controllers/controller.gauge.ts:227](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L227)
 
 ## Methods
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-[controllers/controller.gauge.ts:261](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L261)
+[controllers/controller.gauge.ts:261](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L261)
 
 ___
 
@@ -160,7 +160,7 @@ DoughnutController.draw
 
 #### Defined in
 
-[controllers/controller.gauge.ts:484](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L484)
+[controllers/controller.gauge.ts:484](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L484)
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 #### Defined in
 
-[controllers/controller.gauge.ts:317](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L317)
+[controllers/controller.gauge.ts:317](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L317)
 
 ___
 
@@ -188,7 +188,7 @@ ___
 
 #### Defined in
 
-[controllers/controller.gauge.ts:361](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L361)
+[controllers/controller.gauge.ts:361](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L361)
 
 ___
 
@@ -208,7 +208,7 @@ ___
 
 #### Defined in
 
-[controllers/controller.gauge.ts:295](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L295)
+[controllers/controller.gauge.ts:295](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L295)
 
 ___
 
@@ -228,7 +228,7 @@ ___
 
 #### Defined in
 
-[controllers/controller.gauge.ts:301](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L301)
+[controllers/controller.gauge.ts:301](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L301)
 
 ___
 
@@ -247,7 +247,7 @@ ___
 
 #### Defined in
 
-[controllers/controller.gauge.ts:287](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L287)
+[controllers/controller.gauge.ts:287](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L287)
 
 ___
 
@@ -271,7 +271,7 @@ DoughnutController.update
 
 #### Defined in
 
-[controllers/controller.gauge.ts:437](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L437)
+[controllers/controller.gauge.ts:437](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L437)
 
 ___
 
@@ -298,4 +298,4 @@ DoughnutController.updateElements
 
 #### Defined in
 
-[controllers/controller.gauge.ts:459](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L459)
+[controllers/controller.gauge.ts:459](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L459)

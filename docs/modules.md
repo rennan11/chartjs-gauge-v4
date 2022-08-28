@@ -27,4 +27,4 @@
 
 #### Defined in
 
-[controllers/controller.gauge.ts:194](https://github.com/uk-taniyama/chartjs-gauge/blob/8340856/src/controllers/controller.gauge.ts#L194)
+[controllers/controller.gauge.ts:194](https://github.com/uk-taniyama/chartjs-gauge/blob/39d3eb3/src/controllers/controller.gauge.ts#L194)
