@@ -1,12 +1,13 @@
-[chartjs-gauge-v3 - v3.0.0-alpha.2](../README.md) / GaugeControllerChartOptions
+[chartjs-gauge-v3 - v3.0.0-beta.1](../README.md) / GaugeControllerChartOptions
 
 # Interface: GaugeControllerChartOptions
 
-`
+[DoughnutControllerChartOptions](https://www.chartjs.org/docs/3.6.0/api/interfaces/DoughnutControllerChartOptions.html)
+```
 cutout: '50%',
 rotation: -90,
 circumference: 180,
-`
+```
 
 ## Hierarchy
 

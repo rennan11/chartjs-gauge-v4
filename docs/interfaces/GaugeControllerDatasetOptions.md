@@ -1,6 +1,8 @@
-[chartjs-gauge-v3 - v3.0.0-alpha.2](../README.md) / GaugeControllerDatasetOptions
+[chartjs-gauge-v3 - v3.0.0-beta.1](../README.md) / GaugeControllerDatasetOptions
 
 # Interface: GaugeControllerDatasetOptions
+
+[DoughnutControllerDatasetOptions](https://www.chartjs.org/docs/3.6.0/api/interfaces/DoughnutControllerDatasetOptions.html)
 
 ## Hierarchy
 

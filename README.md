@@ -24,9 +24,10 @@ $ npx http-server node_modules/chartjs-guage-v3
 ## Interfaces
 
 - [GaugeControllerChartOptions](docs/interfaces/GaugeControllerChartOptions.md)
-- [GaugeControllerDatasetOptions](docs/interfaces/GaugeControllerDatasetOptions.md)
 - [NeedleOptions](docs/interfaces/NeedleOptions.md)
 - [ValueLabelOptions](docs/interfaces/ValueLabelOptions.md)
+
+- [GaugeControllerDatasetOptions](docs/interfaces/GaugeControllerDatasetOptions.md)
 
 ## Example
 

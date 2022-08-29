@@ -23,7 +23,7 @@ const html = `
   <title>${pkg.name}</title>
 </head>
 
-<body>
+<body class="content">
   ${content}
 </body>
 

@@ -151,11 +151,12 @@ const valueLabelDefaults: Partial<ValueLabelOptions> = {
 };
 
 /**
- * `
+ * [DoughnutControllerChartOptions](https://www.chartjs.org/docs/3.6.0/api/interfaces/DoughnutControllerChartOptions.html)
+ * ```
  * cutout: '50%',
  * rotation: -90,
  * circumference: 180,
- * `
+ * ```
  */
 export interface GaugeControllerChartOptions extends DoughnutControllerChartOptions {
   needle: NeedleOptions;
@@ -169,14 +170,14 @@ const defaults: DeepPartial<GaugeControllerChartOptions> = {
     animateRotate: true,
     animateScale: false,
   },
-  // The percentage of the chart that we cut out of the middle.
   cutout: '50%',
-  // The rotation of the chart, where the first data arc begins.
   rotation: -90, // -Math.PI
-  // The total circumference of the chart.
   circumference: 180, // 2 * Math.PI,
 };
 
+/**
+ * [DoughnutControllerDatasetOptions](https://www.chartjs.org/docs/3.6.0/api/interfaces/DoughnutControllerDatasetOptions.html)
+ */
 export interface GaugeControllerDatasetOptions extends DoughnutControllerDatasetOptions {
   /**
    * Value used for the needle.
@@ -224,12 +225,18 @@ declare module 'chart.js' {
 export class GaugeController extends DoughnutController {
   static readonly id = 'gauge';
 
+  /** @internal */
   static readonly version = version;
 
+  /** @internal */
+  static readonly defaults = defaults;
+
+  /** @internal */
   static readonly descriptors = {
     _scriptable: (name: string) => name !== 'formatter',
   };
 
+  /** @internal */
   static readonly overrides = {
     aspectRatio: false,
 
@@ -250,6 +257,7 @@ export class GaugeController extends DoughnutController {
     },
   };
 
+  /** @internal */
   center: ArcElement;
 
   constructor(chart: Chart, datasetIndex: number) {
@@ -258,6 +266,7 @@ export class GaugeController extends DoughnutController {
     this.center = new ArcElement({});
   }
 
+  /** @internal */
   _updateMeta() {
     const meta: GaugeMetaExtensions = this._cachedMeta as any;
     const data = meta._parsed;
@@ -284,7 +293,8 @@ export class GaugeController extends DoughnutController {
     return meta;
   }
 
-  getTranslation() {
+  /** @internal */
+  _getTranslation() {
     const zero = this._cachedMeta.data[0];
     if (zero == null) {
       return { dx: 0, dy: 0 };
@@ -292,13 +302,15 @@ export class GaugeController extends DoughnutController {
     return { dx: zero.x, dy: zero.y };
   }
 
-  getAngle(valuePercent: number) {
+  /** @internal */
+  _getAngle(valuePercent: number) {
     const options: GaugeControllerChartOptions = this.chart.options as any;
     const { rotation, circumference } = options;
     return toRadians(rotation + (circumference * valuePercent));
   }
 
-  getSize(value: string | number) {
+  /** @internal */
+  _getSize(value: string | number) {
     return toPercentage(value, this.outerRadius) * this.outerRadius;
   }
 
@@ -327,15 +339,15 @@ export class GaugeController extends DoughnutController {
       color,
     } = options.needle;
 
-    const needleRadius = this.getSize(radius);
-    const needleWidth = this.getSize(width);
-    const needleLength = this.getSize(length);
+    const needleRadius = this._getSize(radius);
+    const needleWidth = this._getSize(width);
+    const needleLength = this._getSize(length);
 
     // center
-    const { dx, dy } = this.getTranslation();
+    const { dx, dy } = this._getTranslation();
 
     // interpolate
-    const angle = this.getAngle((this.center as any as ArcProps).endAngle);
+    const angle = this._getAngle((this.center as any as ArcProps).endAngle);
 
     // draw
     ctx.save();
@@ -402,9 +414,9 @@ export class GaugeController extends DoughnutController {
     const h = (padding.top + textHeight + padding.bottom) + 2 * borderWidth;
 
     // center
-    let { dx, dy } = this.getTranslation();
-    dx += this.getSize(offsetX);
-    dy += this.getSize(offsetY);
+    let { dx, dy } = this._getTranslation();
+    dx += this._getSize(offsetX);
+    dy += this._getSize(offsetY);
 
     // draw
     ctx.translate(dx, dy);
@@ -492,7 +504,5 @@ export class GaugeController extends DoughnutController {
     this.drawValueLabel();
   }
 }
-
-GaugeController.defaults = defaults;
 
 export default GaugeController;

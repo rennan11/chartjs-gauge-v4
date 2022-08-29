@@ -1,4 +1,4 @@
-[chartjs-gauge-v3 - v3.0.0-alpha.2](../README.md) / NeedleOptions
+[chartjs-gauge-v3 - v3.0.0-beta.1](../README.md) / NeedleOptions
 
 # Interface: NeedleOptions
 
