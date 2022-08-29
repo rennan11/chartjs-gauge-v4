@@ -7,7 +7,7 @@
     "declaration": false,
     "sourceMap": true,
     "strict": true,
-    "removeComments": true,
+    "removeComments": false,
     "importsNotUsedAsValues": "error",
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
@@ -23,13 +23,9 @@
     "esModuleInterop": true,
     "rootDir": "./src",
     "baseUrl": "./",
-    "noEmit": true,
-    "paths": {
-      "@": ["./src"],
-      "*": ["*", "node_modules/*"]
-    }
+    "noEmit": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json"],
+  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.json"],
 
   "typedocOptions": {
     "out": "./docs",

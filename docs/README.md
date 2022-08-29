@@ -1,6 +1,6 @@
-chartjs-gauge-v3 - v3.0.0-alpha.2
+chartjs-gauge-v3 - v3.0.0-beta.1
 
-# chartjs-gauge-v3 - v3.0.0-alpha.2
+# chartjs-gauge-v3 - v3.0.0-beta.1
 
 ## Table of contents
 
