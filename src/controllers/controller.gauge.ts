@@ -304,7 +304,8 @@ export class GaugeController extends DoughnutController {
 
   /** @internal */
   _getAngle(valuePercent: number) {
-    const options: GaugeControllerChartOptions = this.chart.options as any;
+    // NOTE options is private member......
+    const options: GaugeControllerChartOptions = (this as any).options as any;
     const { rotation, circumference } = options;
     return toRadians(rotation + (circumference * valuePercent));
   }
@@ -327,8 +328,8 @@ export class GaugeController extends DoughnutController {
   */
 
   drawNeedle() {
-    // @ts-ignore
-    const { options } = this;
+    // NOTE options is private member......
+    const options: GaugeControllerChartOptions = (this as any).options as any;
     const {
       ctx,
     } = this.chart;
@@ -371,8 +372,8 @@ export class GaugeController extends DoughnutController {
   }
 
   drawValueLabel() {
-    // @ts-ignore
-    const { options } = this;
+    // NOTE options is private member......
+    const options: GaugeControllerChartOptions = (this as any).options as any;
     const { valueLabel } = options;
     if (!valueLabel.display) {
       return;
