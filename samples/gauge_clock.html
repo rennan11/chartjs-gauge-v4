@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Gauge Chart</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.js"></script>
+	<script src="../dist/index.js"></script>
+	<script>Chart.controllers.guage || document.write('<script src="https://unpkg.com/chartjs-gauge-v3/dist/chartjs-gauge.js"><\/script>')</script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+	<a href="..">Home</a>
+	<div id="canvas-holder" style="width:100%">
+		<canvas id="chart" style="height: 500px; width: 500px;"></canvas>
+	</div>
+	<script>
+		const CHART_COLORS = {
+			red: "#ff6384",
+			orange: "#ff9f40",
+			yellow: "#ffcd56",
+			green: "#4bc0c0",
+			blue: "#36a2eb",
+			purple: "#9966ff",
+			grey: "#c9cbcf",
+			black: '#404244',
+			white: '#F0F0F0',
+		};
+
+		const hours = [...Array(12)].map((_, i) => i + 1);
+		const mins = [...Array(60)].map((_, i) => i + 1);
+
+		function getTime() {
+			const date = new Date();
+			const h = date.getHours();
+			const m = date.getMinutes();
+			return [h + m / 60, m];
+		}
+
+		let [hour, min] = getTime();
+
+		var config = {
+			type: 'gauge',
+			data: {
+				datasets: [{
+					data: hours,
+					value: hour,
+					backgroundColor: [CHART_COLORS.purple, CHART_COLORS.blue, CHART_COLORS.green, CHART_COLORS.yellow, CHART_COLORS.orange, CHART_COLORS.red],
+					rotation: 0,
+					circumference: 360,
+					needle: {
+						color: CHART_COLORS.orange,
+						length: '65%',
+						width: '10%',
+						radius: '5%',
+					},
+					valueLabel: {
+						backgroundColor: CHART_COLORS.orange,
+						offsetY: 0,
+						offsetX: -70,
+					}
+				}, {
+					data: mins,
+					value: min,
+					backgroundColor: [CHART_COLORS.grey, CHART_COLORS.white],
+					cutout: '65%',
+					rotation: 0,
+					circumference: 360,
+					needle: {
+						color: CHART_COLORS.green,
+						length: '95%',
+						width: '14%',
+						radius: '7%',
+					},
+					valueLabel: {
+						backgroundColor: CHART_COLORS.green,
+						offsetY: 0,
+						offsetX: 70,
+					}
+				}]
+			},
+			options: {
+				responsive: true,
+				valueLabel: {
+					formatter(value) {
+						return Math.floor(value).toString().padStart(2, '0')
+					},
+					font: {
+						size: 32,
+					},
+					backgroundColor: CHART_COLORS.black,
+					color: CHART_COLORS.white,
+				}
+			}
+		};
+
+		window.onload = function () {
+			var ctx = document.getElementById('chart').getContext('2d');
+			window.myGauge = new Chart(ctx, config);
+		};
+
+		function updateTime() {
+			const [newHour, newMin] = getTime();
+			if (hour === newHour && min === newMin) {
+				return;
+			}
+			hour = newHour;
+			min = newMin;
+			config.data.datasets[0].value = hour;
+			config.data.datasets[1].value = min;
+			window.myGauge.update();
+		}
+
+		setInterval(updateTime, 500);
+	</script>
+</body>
+
+</html>
