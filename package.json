@@ -2,7 +2,7 @@
   "name": "chartjs-gauge-v3",
   "description": "Gauge chart for chart.js v3",
   "homepage": "https://uk-taniyama.github.io/chartjs-gauge/",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-beta.2",
   "licence": "MIT",
   "jsdelivr": "dist/index.min.js",
   "unpkg": "dist/index.min.js",
