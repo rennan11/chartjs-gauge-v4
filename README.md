@@ -7,7 +7,7 @@ Fork of the [chartjs-gauge](https://github.com/haiiaaa/chartjs-gauge).
 ## Samples
 
 - [Gauge Chart](samples/gauge.html)
-- [Gauge Chart like clock?!](samples/gauge_clock.html)
+- [Gauge Chart like clock?!](samples/gauge-clock.html)
 - [Gauge Chart with datalabels plugin](samples/gauge-datalabels.html)
 - [Gauge Chart with datalabels plugin displaying labels](samples/gauge-datalabels-labels.html)
 
