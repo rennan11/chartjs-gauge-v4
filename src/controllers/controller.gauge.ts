@@ -211,13 +211,6 @@ export type GaugeDataPoint = DoughnutDataPoint;
 export interface GaugeMetaExtensions extends DoughnutMetaExtensions {
   // DoughnutMetaExtensions private member
   _parsed: number[];
-
-  _gauge: {
-    values: number[];
-    valuePercent: number;
-  }
-  previous: number;
-  current: number;
 }
 
 declare module 'chart.js' {
@@ -271,35 +264,44 @@ export class GaugeController extends DoughnutController {
   /** @internal */
   center: ArcElement;
 
+  values: number[];
+
+  valuePercent: number;
+
+  previous: number;
+
+  current: number;
+
   constructor(chart: Chart, datasetIndex: number) {
     super(chart, datasetIndex);
     // center for needle.
     this.center = new ArcElement({});
+    this.values = [];
+    this.valuePercent = 0;
+    this.previous = 0;
+    this.current = 0;
   }
 
   /** @internal */
   _updateMeta() {
     const meta: GaugeMetaExtensions = this._cachedMeta as any;
     const data = meta._parsed;
+    this.values = [];
+    this.valuePercent = 0;
     if (data.length === 0) {
-      meta._gauge = {
-        values: [],
-        valuePercent: 0,
-      };
+      return meta;
     }
 
     const options: GaugeControllerChartOptions = (this as any).options as any;
     const { value = 0, minValue = 0 } = options;
     const maxValue = data.length > 0 ? data[data.length - 1] : minValue + 1;
 
-    const values: number[] = [];
     data.reduce((prev, curr) => {
-      values.push(curr - prev);
+      this.values.push(curr - prev);
       return curr;
     }, minValue);
     const length = maxValue - minValue;
-    const valuePercent = value / length;
-    meta._gauge = { values, valuePercent };
+    this.valuePercent = value / length;
 
     return meta;
   }
@@ -462,19 +464,18 @@ export class GaugeController extends DoughnutController {
     const reset = mode === 'reset';
 
     const meta = this._updateMeta();
-    const initialValue = 0;
 
     // animations on will call update(reset) before update()
     if (reset) {
-      meta.previous = initialValue;
-      meta.current = initialValue;
+      this.previous = 0;
+      this.current = 0;
     } else {
-      meta.previous = meta.current || initialValue;
-      meta.current = meta._gauge.valuePercent;
+      this.previous = this.current || 0;
+      this.current = this.valuePercent;
     }
 
     const parsed = meta._parsed;
-    meta._parsed = meta._gauge.values;
+    meta._parsed = this.values;
     super.update(mode);
     meta._parsed = parsed;
   }
@@ -484,7 +485,7 @@ export class GaugeController extends DoughnutController {
     const meta: GaugeMetaExtensions = this._cachedMeta as any;
 
     const parsed = meta._parsed;
-    meta._parsed = meta._gauge.values;
+    meta._parsed = this.values;
     super.updateElements(elements, start, count, mode);
     meta._parsed = parsed;
 
@@ -496,8 +497,8 @@ export class GaugeController extends DoughnutController {
     super.updateElement(this.center as any, undefined, {
       x: zero.x,
       y: zero.y,
-      startAngle: meta.previous,
-      endAngle: meta.current,
+      startAngle: this.previous,
+      endAngle: this.current,
       circumference: 0,
       outerRadius: 100,
       innerRadius: 0,
@@ -508,8 +509,7 @@ export class GaugeController extends DoughnutController {
   draw() {
     super.draw();
 
-    const meta: GaugeMetaExtensions = this._cachedMeta as any;
-    if (meta._gauge.values.length === 0) {
+    if (this.values.length === 0) {
       return;
     }
     this.drawNeedle();
