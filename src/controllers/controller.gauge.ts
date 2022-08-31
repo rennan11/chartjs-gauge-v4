@@ -161,6 +161,17 @@ const valueLabelDefaults: Partial<ValueLabelOptions> = {
 export interface GaugeControllerChartOptions extends DoughnutControllerChartOptions {
   needle: NeedleOptions;
   valueLabel: ValueLabelOptions;
+  /**
+   * Value used for the needle.
+   * @default 0
+   */
+  value: number;
+
+  /**
+    * Used to offset the start value.
+    * @default 0
+    */
+  minValue: number;
 }
 
 const defaults: DeepPartial<GaugeControllerChartOptions> = {
@@ -173,23 +184,14 @@ const defaults: DeepPartial<GaugeControllerChartOptions> = {
   cutout: '50%',
   rotation: -90, // -Math.PI
   circumference: 180, // 2 * Math.PI,
+  value: 0,
+  minValue: 0,
 };
 
 /**
  * [DoughnutControllerDatasetOptions](https://www.chartjs.org/docs/3.6.0/api/interfaces/DoughnutControllerDatasetOptions.html)
  */
 export interface GaugeControllerDatasetOptions extends DoughnutControllerDatasetOptions {
-  /**
-   * Value used for the needle.
-   * @default 0
-   */
-  value: number;
-
-  /**
-   * Value used for the needle.
-   * @default 0
-   */
-  minValue: number;
 }
 
 export type GaugeDataPoint = DoughnutDataPoint;
@@ -277,8 +279,8 @@ export class GaugeController extends DoughnutController {
       };
     }
 
-    const dataset: GaugeControllerDatasetOptions = this.getDataset() as any;
-    const { value = 0, minValue = 0 } = dataset;
+    const options: GaugeControllerChartOptions = (this as any).options as any;
+    const { value = 0, minValue = 0 } = options;
     const maxValue = data.length > 0 ? data[data.length - 1] : minValue + 1;
 
     const values: number[] = [];
@@ -379,7 +381,6 @@ export class GaugeController extends DoughnutController {
       return;
     }
     const { ctx } = this.chart;
-    const dataset: GaugeControllerDatasetOptions = this.getDataset() as any;
     const {
       color,
       formatter,
@@ -393,7 +394,7 @@ export class GaugeController extends DoughnutController {
     } = valueLabel;
     const font = toFont(valueLabel.font);
 
-    const { value } = dataset;
+    const { value } = options;
     const valueText = (formatter ? formatter(value) : value).toString();
 
     ctx.save();
