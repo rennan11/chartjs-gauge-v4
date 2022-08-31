@@ -43,7 +43,8 @@ export interface NeedleOptions {
   length: number | string;
 
   /**
-   * The color of the needle
+   * The color of the needle.
+   * (Color)[https://www.chartjs.org/docs/latest/api/#color]
    */
   color: Color;
 }
@@ -62,6 +63,12 @@ export interface ValueLabelOptions {
   display: boolean;
 
   /**
+   * The font size of the label.
+   * (FontSpec)[https://www.chartjs.org/docs/latest/api/interfaces/FontSpec.html]
+   */
+  font: FontSpec;
+
+  /**
    * Returns the string representation of the value as it should be displayed on the chart.
    * @default Math.round
    */
@@ -69,16 +76,19 @@ export interface ValueLabelOptions {
 
   /**
    * The text color of the label.
+   * (Color)[https://www.chartjs.org/docs/latest/api/#color]
    */
   color: Color;
 
   /**
    * The background color of the label.
+   * (Color)[https://www.chartjs.org/docs/latest/api/#color]
    */
   backgroundColor: Color;
 
   /**
    * The border color of the label.
+   * (Color)[https://www.chartjs.org/docs/latest/api/#color]
    */
   borderColor: Color;
 
@@ -128,7 +138,6 @@ export interface ValueLabelOptions {
    * @default 0
    */
   offsetY: number | string;
-  font: FontSpec;
 }
 
 const valueLabelDefaults: Partial<ValueLabelOptions> = {
@@ -405,6 +414,7 @@ export class GaugeController extends DoughnutController {
     // const { width: textWidth, actualBoundingBoxAscent, actualBoundingBoxDescent } = ctx.measureText(valueText);
     // const textHeight = actualBoundingBoxAscent + actualBoundingBoxDescent;
     const { width: textWidth } = ctx.measureText(valueText);
+    // TODO ほかのところはどうやっているかを見て真似をしよう！
     // approximate height until browsers support advanced TextMetrics
     // const textHeight = Math.max(ctx.measureText('m').width, ctx.measureText('\uFF37').width);
     const { lineHeight } = font;
