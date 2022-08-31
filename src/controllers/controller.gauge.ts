@@ -343,9 +343,7 @@ export class GaugeController extends DoughnutController {
   drawNeedle() {
     // NOTE options is private member......
     const options: GaugeControllerChartOptions = (this as any).options as any;
-    const {
-      ctx,
-    } = this.chart;
+    const { ctx } = this.chart;
     const {
       radius,
       width,
@@ -416,9 +414,6 @@ export class GaugeController extends DoughnutController {
     // const { width: textWidth, actualBoundingBoxAscent, actualBoundingBoxDescent } = ctx.measureText(valueText);
     // const textHeight = actualBoundingBoxAscent + actualBoundingBoxDescent;
     const { width: textWidth } = ctx.measureText(valueText);
-    // TODO ほかのところはどうやっているかを見て真似をしよう！
-    // approximate height until browsers support advanced TextMetrics
-    // const textHeight = Math.max(ctx.measureText('m').width, ctx.measureText('\uFF37').width);
     const { lineHeight } = font;
     const textHeight = (lineHeight as any) * 1;
 
@@ -451,10 +446,10 @@ export class GaugeController extends DoughnutController {
 
     // draw value text
     const magicNumber = 0.075; // manual testing
-    ctx.fillStyle = color;
     renderText(ctx, valueText, 0, textHeight * magicNumber, font, {
       textAlign: 'center',
       textBaseline: 'middle',
+      color,
     });
     ctx.restore();
   }
@@ -493,7 +488,7 @@ export class GaugeController extends DoughnutController {
       return;
     }
     const zero = elements[0];
-    // TODO center:ArcElementがElementとして、判定されないのだが.....
+    // NOTE center:ArcElement as any.
     super.updateElement(this.center as any, undefined, {
       x: zero.x,
       y: zero.y,
