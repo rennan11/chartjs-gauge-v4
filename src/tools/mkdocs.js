@@ -1,8 +1,10 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-extraneous-dependencies */
 const fs = require('node:fs');
+
 const hljs = require('highlight.js');
 const marked = require('marked');
+
 const pkg = require('../../package.json');
 
 const root = `${__dirname}/../../`;

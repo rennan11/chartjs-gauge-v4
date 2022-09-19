@@ -1,22 +1,28 @@
-/* eslint-disable class-methods-use-this */
-import {
-  DoughnutController,
-  ArcElement,
-  Chart,
+/* eslint-disable class-methods-use-this,no-underscore-dangle */
+import type {
+  ArcProps,
+  Color,
   DoughnutControllerChartOptions,
   DoughnutControllerDatasetOptions,
   DoughnutDataPoint,
   DoughnutMetaExtensions,
-  ArcProps,
-  UpdateMode,
   Element,
   FontSpec,
-  Color,
+  ScriptableAndArrayOptions,
+  ScriptableContext,
+  UpdateMode,
+} from 'chart.js';
+import {
+  ArcElement,
+  Chart,
+  DoughnutController,
 } from 'chart.js';
 import {
   addRoundedRectPath, renderText, toFont, toPercentage, toRadians, toTRBLCorners,
 } from 'chart.js/helpers';
 import type { DeepPartial } from 'chart.js/types/utils';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { version } from '../../package.json';
 
@@ -144,9 +150,10 @@ const valueLabelDefaults: Partial<ValueLabelOptions> = {
   display: true,
   font: undefined,
   formatter: Math.round,
-  color: undefined,
-  backgroundColor: undefined,
-  borderColor: undefined,
+  // color: Chart.defaults.color as any,
+  color: (() => '#FFF') as any,
+  backgroundColor: Chart.defaults.backgroundColor as any,
+  borderColor: Chart.defaults.borderColor as any,
   borderWidth: 0,
   borderRadius: 5,
   padding: {
@@ -159,6 +166,13 @@ const valueLabelDefaults: Partial<ValueLabelOptions> = {
   offsetY: 0,
 };
 
+interface GaugeControllerOptions extends DoughnutControllerChartOptions {
+  needle: NeedleOptions;
+  valueLabel: ValueLabelOptions;
+  value: number;
+  minValue: number;
+}
+
 /**
  * [DoughnutControllerChartOptions](https://www.chartjs.org/docs/3.6.0/api/interfaces/DoughnutControllerChartOptions.html)
  * ```
@@ -168,8 +182,8 @@ const valueLabelDefaults: Partial<ValueLabelOptions> = {
  * ```
  */
 export interface GaugeControllerChartOptions extends DoughnutControllerChartOptions {
-  needle: NeedleOptions;
-  valueLabel: ValueLabelOptions;
+  needle: ScriptableAndArrayOptions<NeedleOptions, ScriptableContext<'gauge'>>;
+  valueLabel: ScriptableAndArrayOptions<ValueLabelOptions, ScriptableContext<'gauge'>>;
   /**
    * Value used for the needle.
    * @default 0
@@ -201,6 +215,20 @@ const defaults: DeepPartial<GaugeControllerChartOptions> = {
  * [DoughnutControllerDatasetOptions](https://www.chartjs.org/docs/3.6.0/api/interfaces/DoughnutControllerDatasetOptions.html)
  */
 export interface GaugeControllerDatasetOptions extends DoughnutControllerDatasetOptions {
+  needle: ScriptableAndArrayOptions<NeedleOptions, ScriptableContext<'gauge'>>;
+  valueLabel: ScriptableAndArrayOptions<ValueLabelOptions, ScriptableContext<'gauge'>>;
+
+  /**
+   * Value used for the needle.
+   * @default 0
+   */
+  value: number;
+
+  /**
+    * Used to offset the start value.
+    * @default 0
+    */
+  minValue: number;
 }
 
 export type GaugeDataPoint = DoughnutDataPoint;
@@ -238,6 +266,12 @@ export class GaugeController extends DoughnutController {
   /** @internal */
   static readonly descriptors = {
     _scriptable: (name: string) => name !== 'formatter',
+    // needle: {
+    //   _scriptable: true,
+    // },
+    // valueLabel: {
+    //   _scriptable: true,
+    // },
   };
 
   /** @internal */
@@ -264,12 +298,16 @@ export class GaugeController extends DoughnutController {
   /** @internal */
   center: ArcElement;
 
+  /** @internal */
   values: number[];
 
+  /** @internal */
   valuePercent: number;
 
+  /** @internal */
   previous: number;
 
+  /** @internal */
   current: number;
 
   constructor(chart: Chart, datasetIndex: number) {
@@ -292,7 +330,7 @@ export class GaugeController extends DoughnutController {
       return meta;
     }
 
-    const options: GaugeControllerChartOptions = (this as any).options as any;
+    const options: GaugeControllerOptions = (this as any).options as any;
     const { value = 0, minValue = 0 } = options;
     const maxValue = data.length > 0 ? data[data.length - 1] : minValue + 1;
 
@@ -318,7 +356,7 @@ export class GaugeController extends DoughnutController {
   /** @internal */
   _getAngle(valuePercent: number) {
     // NOTE options is private member......
-    const options: GaugeControllerChartOptions = (this as any).options as any;
+    const options: GaugeControllerOptions = (this as any).options as any;
     const { rotation, circumference } = options;
     return toRadians(rotation + (circumference * valuePercent));
   }
@@ -342,14 +380,13 @@ export class GaugeController extends DoughnutController {
 
   drawNeedle() {
     // NOTE options is private member......
-    const options: GaugeControllerChartOptions = (this as any).options as any;
+    const options: GaugeControllerOptions = (this as any).options as any;
     const { ctx } = this.chart;
+    const { needle } = options;
     const {
-      radius,
-      width,
-      length,
-      color,
-    } = options.needle;
+      radius, width, length,
+    } = needle;
+    const { color } = needle;
 
     const needleRadius = this._getSize(radius);
     const needleWidth = this._getSize(width);
@@ -357,7 +394,6 @@ export class GaugeController extends DoughnutController {
 
     // center
     const { dx, dy } = this._getTranslation();
-
     // interpolate
     const angle = this._getAngle((this.center as any as ArcProps).endAngle);
 
@@ -384,7 +420,7 @@ export class GaugeController extends DoughnutController {
 
   drawValueLabel() {
     // NOTE options is private member......
-    const options: GaugeControllerChartOptions = (this as any).options as any;
+    const options: GaugeControllerOptions = (this as any).options as any;
     const { valueLabel } = options;
     if (!valueLabel.display) {
       return;

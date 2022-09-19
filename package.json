@@ -3,7 +3,7 @@
   "description": "Gauge chart for chart.js v3",
   "homepage": "https://uk-taniyama.github.io/chartjs-gauge/",
   "version": "3.0.0",
-  "licence": "MIT",
+  "license": "MIT",
   "jsdelivr": "dist/index.min.js",
   "unpkg": "dist/index.min.js",
   "main": "dist/index.cjs.js",
@@ -31,6 +31,23 @@
   "bugs": {
     "url": "https://github.com/uk-taniyama/chartjs-gauge/issues"
   },
+  "scripts": {
+    "prepublishOnly": "npm-run-all -s clean t build:all",
+    "clean": "rimraf dist test-result",
+    "build": "rollup -c",
+    "build:all": "npm-run-all -p build:docs build",
+    "build:watch": "rollup -c --watch",
+    "build:docs": "node src/tools/mkdocs.js",
+    "docs": "typedoc src/index.ts",
+    "lint": "eslint src",
+    "start": "npm-run-all server build:watch",
+    "server": "mdserver .",
+    "t": "karma start karma.conf.js --single-run --coverage --browsers chromeheadless",
+    "test": "karma start karma.conf.js",
+    "test:html": "karma start karma.conf.js --reporters progress,kjhtml",
+    "clean-chartjs": "rimraf modules/chart.js",
+    "clone-chartjs": "git clone --branch v3.1.0 --depth 1 https://github.com/chartjs/Chart.js.git modules/chart.js"
+  },
   "peerDependencies": {
     "chart.js": "^3.9.1"
   },
@@ -41,6 +58,8 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^14.1.0",
     "@rollup/plugin-typescript": "^8.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
     "chart.js": "^3.9.1",
     "chartjs-test-utils": "^0.4.0",
     "eslint": "^8.23.1",
@@ -72,22 +91,5 @@
     "typedoc-plugin-markdown": "^3.13.6",
     "typescript": "^4.8.3",
     "yargs": "^17.5.1"
-  },
-  "scripts": {
-    "prepublishOnly": "npm-run-all -s clean t build:all",
-    "clean": "rimraf dist test-result",
-    "build": "rollup -c",
-    "build:all": "npm-run-all -p build:docs build",
-    "build:watch": "rollup -c --watch",
-    "build:docs": "node src/tools/mkdocs.js",
-    "docs": "typedoc src/index.ts",
-    "lint": "eslint src",
-    "start": "npm-run-all server build:watch",
-    "server": "mdserver .",
-    "t": "karma start karma.conf.js --single-run --coverage --browsers chromeheadless",
-    "test": "karma start karma.conf.js",
-    "test:html": "karma start karma.conf.js --reporters progress,kjhtml",
-    "clean-chartjs": "rimraf modules/chart.js",
-    "clone-chartjs": "git clone --branch v3.1.0 --depth 1 https://github.com/chartjs/Chart.js.git modules/chart.js"
   }
 }
