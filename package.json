@@ -1,8 +1,7 @@
 {
-  "name": "chartjs-gauge-v3",
-  "description": "Gauge chart for chart.js v3",
-  "homepage": "https://uk-taniyama.github.io/chartjs-gauge/",
-  "version": "3.0.0",
+  "name": "chartjs-gauge-v4",
+  "description": "Gauge chart for chart.js v4",
+  "version": "0.1.0",
   "license": "MIT",
   "jsdelivr": "dist/index.min.js",
   "unpkg": "dist/index.min.js",
@@ -26,10 +25,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/uk-taniyama/chartjs-gauge"
+    "url": "https://github.com/rennan11/chartjs-gauge-v4"
   },
   "bugs": {
-    "url": "https://github.com/uk-taniyama/chartjs-gauge/issues"
+    "url": "https://github.com/rennan11/chartjs-gauge-v4/issues"
   },
   "scripts": {
     "prepublishOnly": "npm-run-all -s clean t build:all",
