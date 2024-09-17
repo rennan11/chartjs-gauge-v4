@@ -49,7 +49,7 @@
     "clone-chartjs": "git clone --branch v3.1.0 --depth 1 https://github.com/chartjs/Chart.js.git modules/chart.js"
   },
   "peerDependencies": {
-    "chart.js": "^3.9.1"
+    "chart.js": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
