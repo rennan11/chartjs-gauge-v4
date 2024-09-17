@@ -1,4 +1,4 @@
-# ![chartjs-gauge logo](./samples/logo.svg) chartjs-gauge-v3
+# ![chartjs-gauge logo](./samples/logo.svg) chartjs-gauge-v4
 
 Simple gauge chart for [Chart.js](https://www.chartjs.org/) >= 4.0.1?
 
